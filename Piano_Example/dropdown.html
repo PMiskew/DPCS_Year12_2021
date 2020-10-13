@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+</head>
+<body>
+
+
+    <!-- Dropdown Trigger -->
+    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Scale Type</a>
+    <a class='dropdown-trigger btn' href='#' data-target='dropdown2'>Scale Type</a>
+
+    <!-- Dropdown Structure -->
+    <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!">Major</a></li>
+        <li><a href="#!">Minor</a></li>
+    </ul>
+
+    <ul id='dropdown2' class='dropdown-content'>
+        <li><a href="#!"><center>A</center></a></li>
+        <li><a href="#!"><center>A#</center></a></li>
+        <li><a href="#!"><center>B</center></a></li>
+        <li><a href="#!"><center>C</center></a></li>
+        <li><a href="#!"><center>C#</center></a></li>
+        <li><a href="#!"><center>D</center></a></li>
+        <li><a href="#!"><center>D#</center></a></li>
+        <li><a href="#!"><center>E</center></a></li>
+        <li><a href="#!"><center>F</center></a></li>
+        <li><a href="#!"><center>F#</center></a></li>
+        <li><a href="#!"><center>G</center></a></li>
+        <li><a href="#!"><center>G#</center></a></li>
+        
+    </ul>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+<script>  
+
+            
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+
+    var dropdownOptions = {
+    
+        'closeOnClick': true,
+        'hover':true,
+        'constrainWidth':true,
+
+       
+    }
+    var instances = M.Dropdown.init(elems, dropdownOptions);
+  });
+
+</script>
+
+
+</body>
+</html>

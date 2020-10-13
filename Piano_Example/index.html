@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Piano Scale Helper
+	</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+          
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+</head>
+<body>
+
+  <div style = "padding: 10px">
+     <p class="flow-text white-text black">Piano Scale Generators</p>
+
+   
+   <h5>Select Scale</h5>
+
+    <select id = "scale_type" onchange = "display_update()">
+     
+     <option value = "1">Major</option>
+     <option value = "2">Minor</option>
+
+    </select>
+ 
+    <h5>Select Key</h5>
+    <select id = "scale_key" onchange = "display_update()">
+
+      <option value = "0">A</option>
+      <option value = "1">A#</option>
+      <option value = "2">B</option>
+      <option value = "3">C</option>
+      <option value = "4">C#</option>
+      <option value = "5">D</option>
+      <option value = "6">D#</option>
+      <option value = "7">E</option>
+      <option value = "8">F</option>
+      <option value = "9">F#</option>
+      <option value = "10">G</option>
+      <option value = "11">G#</option>
+
+    </select>
+ 
+  <img id = "image" src="images/keys_blank.jpg" alt="Girl in a jacket" style = "width: 100%">
+  </div>
+
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+<script>
+
+  //Initalize page to C
+  document.getElementById("image").src = "images/keys_CM_Am.jpg"
+  var n_select = document.getElementById("scale_key");
+  n_select.value = "3";
+
+  function display_update() {
+    
+    var s_select = document.getElementById("scale_type");
+    var s_type = s_select.options[s_select.selectedIndex].value;
+
+    var n_select = document.getElementById("scale_key");
+    var n_type = n_select.options[n_select.selectedIndex].value;
+
+    console.log(s_type,n_type)
+    //Order based on circle of 5th
+    //CM,am
+    if ((s_type === "1" && n_type === "3") || (s_type === "2" && n_type === "0")){
+      document.getElementById("image").src = "images/keys_CM_Am.jpg"
+    }
+    //GM,em
+    else if ((s_type === "1" && n_type === "10") || (s_type === "2" && n_type === "7")) {
+      document.getElementById("image").src = "images/keys_GM_Em.jpg"
+
+    }
+    //DM,bm
+    else if ((s_type === "1" && n_type === "5") || (s_type === "2" && n_type === "2")) {
+      document.getElementById("image").src = "images/keys_DM_bm.jpg"
+
+    }
+    //AM,fsm
+    else if ((s_type === "1" && n_type === "0") || (s_type === "2" && n_type === "9")) {
+      document.getElementById("image").src = "images/keys_AM_fsm.jpg"
+
+    }
+    //EM,Csm
+    else if ((s_type === "1" && n_type === "7") || (s_type === "2" && n_type === "4")) {
+
+      document.getElementById("image").src = "images/keys_EM_csm.jpg"
+
+    }
+    //BM, Gsm
+    else if ((s_type === "1" && n_type === "2") || (s_type === "2" && n_type === "11")) {
+
+      document.getElementById("image").src = "images/keys_BM_Gsm.jpg"
+
+    }
+    //FsM,Dsm
+    else if ((s_type === "1" && n_type === "4") || (s_type === "2" && n_type === "6")) {
+
+      document.getElementById("image").src = "images/keys_FsM_Dsm.jpg"
+
+    }
+    //GsM,Fm
+    else if ((s_type === "1" && n_type === "11") || (s_type === "2" && n_type === "8")) {
+
+      document.getElementById("image").src = "images/keys_GsM_Fm.jpg"
+
+    }
+    //DsM,Cm
+    else if ((s_type === "1" && n_type === "6") || (s_type === "2" && n_type === "3")) {
+
+      document.getElementById("image").src = "images/keys_DsM_Cm.jpg"
+
+    }
+    //AsM,Gm
+    else if ((s_type === "1" && n_type === "1") || (s_type === "2" && n_type === "10")) {
+
+      document.getElementById("image").src = "images/keys_AsM_Gm.jpg"
+
+    }
+    else if ((s_type === "1" && n_type === "8") || (s_type === "2" && n_type === 5)) {
+
+      document.getElementById("image").src = "images/keys_FM_Dm.jpg"
+
+    }
+
+
+    console.log("changing")
+  }
+
+
+  // Or with jQuery
+
+
+</script>
+</body>
+</html>
