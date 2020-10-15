@@ -1,20 +1,46 @@
-//This is for authentication firebase code
-//get data
-db.collection('guides').get().then(snapshot => {
-
-    setupGuides(snapshot.docs)
-})
+//TEND TO GROUP ANYTHING FIREBASE RELATED
 
 //Listen for auth state changes
 //Runs when page loads
 //ADDED IN VIDEO 8
 auth.onAuthStateChanged(user => {
     if (user) {
-        console.log("User Logged In: ",user)
+        db.collection('guides').onSnapshot(snapshot => {
+            setupGuides(snapshot.docs)
+            setupUI(user)
+        }).catch(err => {
+            console.log(err.message)
+
+        })
     }
     else {
-        console.log("User Logged out")
+        setupUI()
+        setupGuides([])
+        
     }
+});
+
+//CREATE NEW GUIDE
+const createForm = document.querySelector('#create-form');
+
+createForm.addEventListener('submit', (e) => {
+
+    e.preventDefault();
+    db.collection('guides').add({
+        title: createForm['title'].value,
+        content: createForm['content'].value
+
+    }).then(() => {
+        //close modal and reset form
+        const modal = document.querySelector('#modal-create');
+        M.Modal.getInstance(modal).close();
+        createForm.reset();
+
+    }).catch(err => {
+        console.log(err.message)
+
+    })
+
 });
 
 const signupForm = document.querySelector('#signup-form')
