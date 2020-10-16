@@ -8,10 +8,10 @@ auth.onAuthStateChanged(user => {
         db.collection('guides').onSnapshot(snapshot => {
             setupGuides(snapshot.docs)
             setupUI(user)
-        }).catch(err => {
+        }, err => {
             console.log(err.message)
 
-        })
+        });
     }
     else {
         setupUI()
@@ -44,6 +44,7 @@ createForm.addEventListener('submit', (e) => {
 });
 
 const signupForm = document.querySelector('#signup-form')
+
 signupForm.addEventListener('submit',(e) => {
     e.preventDefault() //stops page from reloading
     
@@ -56,12 +57,16 @@ signupForm.addEventListener('submit',(e) => {
     //Note: If you use weak passwords it will not work
     //Note: This logs the user in.  Once this runs Firebase assumes logged in. 
     auth.createUserWithEmailAndPassword(email,password).then(cred => {
-        console.log(cred.user)
-        const modal = document.querySelector('#modal-signup');
-        M.Modal.getInstance(modal).close();
-        signupForm.reset();
-
+        return db.collection('users').doc(cred.user.uid).set({
+            bio: signupForm['signup-bio'].value
+        });
+    }).then(() => {
+            const modal = document.querySelector('#modal-signup');
+            M.Modal.getInstance(modal).close();
+            signupForm.reset();
     });
+
+
 });
 
 //log out method
