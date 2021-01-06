@@ -1,3 +1,14 @@
+//ADD ADMIN CLOUD FUNCTIONS
+const adminForm = document.querySelector('.admin-actions');
+adminForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const adminEmail = document.querySelector('#admin-email').value;
+    const addAdminRole = functions.httpsCallable('addAdminRole')
+    addAdminRole({email: adminEmail}).then(result => {
+        console.log(result);
+    })
+})
+
 //TEND TO GROUP ANYTHING FIREBASE RELATED
 
 //Listen for auth state changes
@@ -5,6 +16,11 @@
 //ADDED IN VIDEO 8
 auth.onAuthStateChanged(user => {
     if (user) {
+
+        user.getIdTokenResult().then(idTokenResult => {
+            console.log(idTokenResult.claims.admin);
+
+        });
         db.collection('guides').onSnapshot(snapshot => {
             setupGuides(snapshot.docs)
             setupUI(user)
@@ -100,5 +116,6 @@ loginForm.addEventListener('submit', (e) => {
 
 
     });
+    console.log("TADA")
 
 });

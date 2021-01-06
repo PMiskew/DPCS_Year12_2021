@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+ 
+ 
+  <title>Learning Materialize</title>
+</head>
+<body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+ 
+    <!-- Dropdown Trigger -->
+    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Drop Me!</a>
+
+    <!-- Dropdown Structure -->
+    <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="#!">one</a></li>
+    <li><a href="#!">two</a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><a href="#!">three</a></li>
+    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+    </ul>
+
+
+    <!-- Dropdown Trigger -->
+    <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
+
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#" class="hover-nav-finance" id="camp-dates">CAMP DATES</a></li>
+        <li><a href="#" class="hover-nav-finance" id="prices">CAMP PRICES</a></li>
+    </ul>
+    <a class="waves-effect waves-light btn modal-trigger" data-target="modal-signup">button</a>
+
+     
+
+
+    <!--Sign Up Modal-->
+    <div id="modal-signup" class="modal">
+        <div class="modal-content">
+        <h4>Drop Down Example</h4><br/>
+        <form id="signup-form">
+          
+            <div class="input-field">
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><a href="#!">one</a></li>
+                    <li><a href="#!">two</a></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li><a href="#!">three</a></li>
+                    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+                    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+                </ul>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Sign Up</button>
+        </form>
+        </div>
+    </div>
+
+    <script>
+
+            
+        var modals = document.querySelectorAll('.modal');
+        M.Modal.init(modals);
+        //document.addEventListener('DOMContentLoaded', function() {
+        //    var elems = document.querySelectorAll('.dropdown-trigger');
+        //    var instances = M.Dropdown.init(elems, options);
+        //});
+
+        $('.dropdown-trigger').dropdown();
+        
+    
+        
+        $('.dropdown-button').dropdown({
+          inDuration: 300,
+          outDuration: 225,
+          constrain_width: false, // Does not change width of dropdown to that of the activator
+          hover: true, // Activate on hover
+          gutter: 0, // Spacing from edge
+          belowOrigin: false, // Displays dropdown below the button
+          alignment: 'left' // Displays dropdown with edge aligned to the left of button
+        }
+      );
+
+    </script>
+</body>
+</html>

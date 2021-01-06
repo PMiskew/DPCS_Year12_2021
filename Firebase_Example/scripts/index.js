@@ -45,7 +45,7 @@ const setupGuides = (data) => {
         data.forEach(doc => {
     
             const guide = doc.data();
-            console.log(guide)
+            //console.log(guide)
             //Template String
             const li = `
                 <li>

@@ -26,7 +26,7 @@ https://www.youtube.com/watch?v=lkNvj7fUcRw&t=145s
           <a href="*" class = "grey-text" id = "logout">Logout</a>
         </li>
         
-        <li class = "logged-in" style = "display: none">
+        <li class = "admin" style = "display: none">
           <a href="#" class = "grey-text modal-trigger" data-target="modal-create">Create Guide</a>
         </li>
         
@@ -42,8 +42,8 @@ https://www.youtube.com/watch?v=lkNvj7fUcRw&t=145s
   </nav>
 
   <!-- Admin Actions-->
-  <form class = "center-align admin-actions" style="margin: 40px auto; max-width:300px;">
-    <input type = "email" placeholder = "User Email" id = "admin-email"required />
+  <form class = "center-align admin-actions admin" style="margin: 40px auto; max-width:300px; display:none;">
+    <input type = "email" placeholder = "User Email" id = "admin-email" required />
     <button class = "btn-small yellow darken-2 z-depth-0">Make admin</button>
   </form>
 
@@ -130,8 +130,10 @@ https://www.youtube.com/watch?v=lkNvj7fUcRw&t=145s
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.22.1/firebase-functions.js"></script>
 
 <script>
+  
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
@@ -150,9 +152,34 @@ https://www.youtube.com/watch?v=lkNvj7fUcRw&t=145s
 
   const auth = firebase.auth();
   const db = firebase.firestore();
+  const functions = firebase.functions();
 
   //Suggests this is no necssary: Tutorial using firebase version 5.6 
   //db.settings({ timestampsInSnapShots: true});
+
+  
+  function signIn() {
+
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().signInWithRedirect(provider).then(function(result) { 
+
+
+
+      //document.getElementById("uid").innerHTML = userId; // display Google uid on page
+      
+    });
+
+  } // end signin 
+
+
+  function signOut() {
+    
+    firebase.auth().signOut();
+  
+  }
+
+  signIn()
 </script>
 
 

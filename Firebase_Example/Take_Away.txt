@@ -1,0 +1,22 @@
+Video 1 - 5
+
+- A refresher on authentication and sign in methods - 
+    -IA - Everyone should have some way to authenicating users. 
+- Materialize:
+
+-Promises
+
+-JSON Objects
+- Modals 
+
+    - Modals using mateirlaize is a nice quick way to set up taking use information. 
+
+-  
+
+
+Links:
+
+Creating UML Diagrams:
+https://creately.com/diagram/example/i2brq6uc1/diagrama%20json
+
+
