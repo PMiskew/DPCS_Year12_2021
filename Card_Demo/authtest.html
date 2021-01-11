@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		
+	</title>
+
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+</head>
+<body>
+
+
+	  <nav class = "green lighen-1">
+	    <div class="nav-wrapper">
+	     
+	      <a href="#" class="brand-logo">Logo</a>
+	      <ul id="nav-mobile" class="right hide-on-med-and-down">
+	        <li><a class = "user_login" id = "button_login" href="#l">Login</a></li>
+	        <li><a class = "user_logout" id = "button_logout" href="#">Logout</a></li>
+	       
+	      </ul>
+	    </div>
+	  </nav>
+
+	<div class = "container">
+		<p>Test Page</p>
+		
+	</div>
+
+
+
+
+
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+ 	
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+
+	<script>
+
+	var loginState = false
+	//Firebase config
+	var firebaseConfig = {
+		apiKey: "AIzaSyB-edeq9As3ycnY8zVVL6Qw1ihJiBdf3zs",
+		authDomain: "ia-demo-1-cards.firebaseapp.com",
+		databaseURL: "https://ia-demo-1-cards-default-rtdb.firebaseio.com",
+		projectId: "ia-demo-1-cards",
+		storageBucket: "ia-demo-1-cards.appspot.com",
+		messagingSenderId: "619007581868",
+		appId: "1:619007581868:web:cda7cf83f61bb27e96c909",
+		measurementId: "G-ZVJPPPDZSG"
+	};
+
+	//initalize firebase app
+	firebase.initializeApp(firebaseConfig);
+
+
+	function signIn() {
+
+		var provider = new firebase.auth.GoogleAuthProvider();
+
+		firebase.auth().signInWithPopup(provider).then(function(result) { 
+
+
+			console.log("SUCCESS")
+		//document.getElementById("uid").innerHTML = userId; // display Google uid on page
+
+		});
+
+	} // end signin 
+
+
+	function signOut() {
+
+		firebase.auth().signOut();
+
+	}
+
+
+	function setDisplay() {
+		if (loginState === false) {
+
+			l = document.getElementsByClassName("user_logout") 
+			
+			for (i = 0; i < l.length; i = i + 1) {
+				console.log(l[i])
+				l[i].style.display = "none";
+			}
+
+			
+		}
+	}
+	
+	setDisplay()
+
+	const loginBTN = document.querySelector("button_login")
+</script>
+</body>
+</html>

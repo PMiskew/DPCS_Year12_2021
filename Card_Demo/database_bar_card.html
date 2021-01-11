@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		
+
+	</title>
+
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+</head>
+
+<body>
+
+	<nav>
+		<div class="nav-wrapper blue lighten-2">
+			<a href="#" class="brand-logo">Logo</a>
+			<ul id="nav-mobile" class="right hide-on-med-and-down">
+				<li><a class = "modal-trigger" href="#entry">Add Question</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div id="entry" class="modal">
+		<div class="modal-content">
+			<h4>Sign-Up</h4><br/>
+
+			<form id="submitQuestion">
+			
+				<div class="input-field">
+		  			<input type="text" id="entry_question" autocomplete="" required />
+		  			<label for="entry-question">Question</label>
+				</div>
+		
+				<div class="input-field">
+		  			<input type="text" id="entry_answer" autocomplete="" required />
+		  			<label for="entry-password">Answer</label>
+				</div>
+		
+				<div class="input-field">
+		  			<input type="text" id="entry_hint" autocomplete="" required />
+		  			<label for="entry-hint">Hint</label>
+				</div>
+
+				<div class="input-field">
+		  			<input type="text" id="entry_image" autocomplete="" required />
+		  			<label for="entry-image">image-link</label>
+				</div>
+		
+				<button class="btn blue darken-2 z-depth-0">Submit Question</button>
+	
+			</form>
+		</div>
+	</div>
+
+ 	<div class = "container">
+		<div class="row" id = "cardDisplay">
+		
+		</div>
+	</div>
+
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+ 	
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+
+	<script src = "scripts/init.js"></script>
+	<script src = "scripts/index.js"></script>
+	
+
+	<script>
+
+		function signIn() {
+
+			var provider = new firebase.auth.GoogleAuthProvider();
+
+			firebase.auth().signInWithPopup(provider).then(function(result) { 
+
+
+				console.log("SUCCESS")
+			//document.getElementById("uid").innerHTML = userId; // display Google uid on page
+
+			});
+
+		} // end signin 
+
+
+		function signOut() {
+
+			firebase.auth().signOut();
+
+		}
+
+	signIn()
+	</script>
+
+
+
+
+
+</body>
+</html>
+  
