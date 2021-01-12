@@ -23,6 +23,7 @@
       
         <li><a class = "lin_content" href="#" style = "display: none">My Choices</a></li>
         <li><a class = "lin_content" href="#" style = "display: none">All Options</a></li>
+        <li><a class = "lin_content" href="#" style = "display: none">Service Quiz</a></li>
         <li><a class = "modal-trigger lout_content" href="#loginModal">Login</a></li>
         <li><a class = "modal-trigger lout_content" href="#newUserModal">New User</a></li>
         <li><a id = "logoutBTN" class = "lin_content" href="#" style = "display: none">Logout</a></li>
@@ -103,6 +104,9 @@ PAGE CONTENT
   
   <div class = "container" id = "allChoices" style = "display: none">
   		<h1>All Choices</h1>
+  </div>
+    <div class = "container" id = "serviceQuiz" style = "display: none">
+  		<h1>Service Quiz</h1>
   </div>
   
   <div class = "container" id = "myChoiceDisplay" style = "display: none">
@@ -291,6 +295,10 @@ PAGE CONTENT END
 		allChoices = document.getElementById("allChoices")
 		allChoices.style.display = "none"
 
+		//set page content
+		serviceQuiz = document.getElementById("serviceQuiz")
+		allChoices.style.display = "none"
+
 
 	})
 	//LOGIN ****************************************************
@@ -318,6 +326,7 @@ PAGE CONTENT END
 		allChoices = document.getElementById("allChoices")
 		allChoices.style.display = "block"
 
+		
 
 	}
 
