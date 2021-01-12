@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>INDEX 2 - IA SAMPLE</title>
+
+	   <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+            
+</head>
+
+
+<body>
+
+
+
+
+  <nav>
+    <div class=" orange darken-2 nav-wrapper">
+      <a href="#" class="brand-logo">Logo</a>
+
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      
+        <li><a class = "lin_content" href="#" style = "display: none">My Choices</a></li>
+        <li><a class = "lin_content" href="#" style = "display: none">All Options</a></li>
+        <li><a class = "modal-trigger lout_content" href="#loginModal">Login</a></li>
+        <li><a class = "modal-trigger lout_content" href="#newUserModal">New User</a></li>
+        <li><a id = "logoutBTN" class = "lin_content" href="#" style = "display: none">Logout</a></li>
+        
+      </ul>
+    </div>
+  </nav>
+
+	<!--
+		LOGIN MODAL
+	-->
+	
+	<div id="loginModal" class="modal">
+		
+		<div class="modal-content">
+			<h4>Login</h4><br/>
+
+			<form id="loginData">
+			
+				<div class="input-field">
+		  			<input type="text" id="userName" autocomplete="" required />
+		  			<label for="entry-question">User Name</label>
+				</div>
+		
+				<div class="input-field">
+		  			<input type="password" id="userPassword" autocomplete="" required />
+		  			<label for="entry-password">Password</label>
+				</div>
+		
+				<button class="btn yellow z-depth-0">Login</button>
+	
+			</form>
+		</div>
+
+	</div>
+
+	
+
+	<!--
+	NEW USER MODAL
+	-->
+
+	<div id="newUserModal" class="modal">
+		
+		<div class="modal-content">
+			<h4>Login</h4><br/>
+
+			<form id="newUserData">
+			
+				<div class="input-field">
+		  			<input type="text" id="userNameNU" autocomplete="" required />
+		  			<label for="entry-question">User Name</label>
+				</div>
+		
+				<div class="input-field">
+		  			<input type="password" id="userPasswordNU" autocomplete="" required />
+		  			<label for="entry-password">Enter Password</label>
+				</div>
+
+				<div class="input-field">
+		  			<input type="password" id="confirmPasswordNU" autocomplete="" required />
+		  			<label for="entry-password">Confirm Password</label>
+				</div>
+	
+				<button class="btn yellow z-depth-0">Create User</button>
+	
+			</form>
+		</div>
+
+	</div>
+
+<!--
+PAGE CONTENT
+-->
+  <div class = "container" id = "landing">
+  	<h1>Landing</h1>
+  </div>
+  
+  <div class = "container" id = "allChoices" style = "display: none">
+  		<h1>All Choices</h1>
+  </div>
+  
+  <div class = "container" id = "myChoiceDisplay" style = "display: none">
+  		<h1>My Choices</h1>
+  </div>
+
+
+<!--
+PAGE CONTENT END
+-->
+
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-database.js"></script>
+
+	
+	<script>
+
+	//Materlaize Elements Initialize
+	document.addEventListener('DOMContentLoaded', function() {
+
+		options = {}
+		var elems = document.querySelectorAll('.modal');
+		var instances = M.Modal.init(elems, options);
+
+	});
+
+	// Your web app's Firebase configuration
+	var firebaseConfig = {
+		apiKey: "AIzaSyBOXY1CCF6M2Vmwx0pbhgdWVhWgBHgfPk8",
+		authDomain: "clubdemo-9f36f.firebaseapp.com",
+		databaseURL: "https://clubdemo-9f36f-default-rtdb.firebaseio.com",
+		projectId: "clubdemo-9f36f",
+		storageBucket: "clubdemo-9f36f.appspot.com",
+		messagingSenderId: "28246560576",
+		appId: "1:28246560576:web:91bdf81de086966fbe74a5"
+	};
+
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+
+	var data;
+	var users;
+	var db = firebase.database()
+
+
+	/*
+	Top for IA:
+
+	1.	I am not managing the data in real time.  I am loading it into the 
+		program into JSON objects and will manipulate it and run all displays based on that
+
+	2.  I have loaded the data and created a landing page.  In doing this I 
+		have cheated the system a little in that I can wait for 2 seconds and 
+		know it is loaded.  Nothing will be done until my first click, by which
+		point all the data is loaded
+
+	3.	I have not used the authentication system.  What I have done is created
+		users in my database and loaded them.  This means I can leverage this for some algorithmic demonstrations
+
+	4.  I have kept everything in this one page.  It simplifys things when I 
+		don't have to swap pages. 
+
+	*/
+	//load data
+	db.ref('/service/').once('value').then((snapshot) => {
+
+		data = snapshot.val()
+
+	}).then((e) => {
+
+		console.log(data)
+
+	});
+
+	db.ref('/users/').once('value').then((snapshot) => {
+
+		users = snapshot.val()
+
+	}).then((e) => {
+		
+		console.log(users)
+
+
+	})
+
+
+	//NEW USER**************************************************
+	const newUserForm = document.getElementById("newUserData")
+
+	newUserForm.addEventListener('submit',(e) => {
+
+		//stops the form from reloading the page. 
+		e.preventDefault()
+
+		un = document.getElementById("userNameNU").value;
+		p = document.getElementById("userPasswordNU").value;
+		pconfirm = document.getElementById("confirmPasswordNU").value;
+
+		found = false
+
+		//check passwords match
+		if (p === pconfirm) {
+
+			//loop through users to ensure new user name
+			for (key in users) {
+
+				if (users[key] === un) {
+					found = true
+					break;
+				}
+			}
+		
+			if (found == false) {
+				
+				//STEP 1: PUSH TO DB MUST DO IN PROMISE FOR UPDATE 
+				//NOTE: Much better approaches here, but this works for us
+
+
+				newPostKey = firebase.database().ref().child('users').push().key
+
+				firebase.database().ref('users/' + newPostKey).set({
+					uname: un,
+					pword: p,
+
+				}).then(() => {
+				
+					db.ref('/users/').once('value').then((snapshot) => {
+
+						users = snapshot.val()
+
+					})
+
+
+				}).then(() => {
+					console.log(users)
+					console.log("DONE")
+				});
+
+			}
+		}
+
+		
+		console.log(un,p,pconfirm)
+		//closes modal
+		const modal = document.querySelector('#newUserModal');
+        M.Modal.getInstance(modal).close();
+
+             //clear form
+        newUserForm.reset()
+        login()
+
+	});
+
+
+	//LOGOUT ***************************************************
+
+
+	document.getElementById("logoutBTN").addEventListener("click",(e) => {
+
+
+		//show logged in content
+		content = document.getElementsByClassName("lin_content")
+
+		for (i = 0; i < content.length; i = i + 1) {
+			content[i].style.display = "none"
+		}
+
+		//hide logged out content
+		content = document.getElementsByClassName("lout_content")
+		for (i = 0; i < content.length; i = i + 1) {
+			content[i].style.display = "block"
+		}
+
+		//hide page content
+		landing = document.getElementById("landing")
+		landing.style.display = "block"
+
+		//set page content
+		allChoices = document.getElementById("allChoices")
+		allChoices.style.display = "none"
+
+
+	})
+	//LOGIN ****************************************************
+
+	function login() {
+		
+		//show logged in content
+		content = document.getElementsByClassName("lin_content")
+
+		for (i = 0; i < content.length; i = i + 1) {
+			content[i].style.display = "block"
+		}
+
+		//hide logged out content
+		content = document.getElementsByClassName("lout_content")
+		for (i = 0; i < content.length; i = i + 1) {
+			content[i].style.display = "none"
+		}
+
+		//hide page content
+		landing = document.getElementById("landing")
+		landing.style.display = "none"
+
+		//set page content
+		allChoices = document.getElementById("allChoices")
+		allChoices.style.display = "block"
+
+
+	}
+
+
+	const submitLoginForm = document.getElementById("loginData")
+
+	submitLoginForm.addEventListener('submit',(e) => {
+
+		//stops the form from reloading the page. 
+		e.preventDefault()
+
+		//get values from login modal
+		un = document.getElementById("userName")
+		p = document.getElementById("userPassword")
+
+		//assume not found 
+		found = false;
+
+		for (key in users) {
+		
+			if (users[key]["uname"] === un.value) {
+
+				if (users[key]["pword"] == p.value) {
+					console.log("LOGIN SUCCESS")
+					found = true
+					login()
+				}
+			}
+		}
+
+
+
+		//closes modal
+		const modal = document.querySelector('#loginModal');
+        M.Modal.getInstance(modal).close();
+
+        //clear form
+        submitLoginForm.reset()
+
+
+
+
+
+
+
+	});
+
+	
+	//TESTING*********************************
+
+
+	
+
+	</script>
+
+
+
+
+		
+
+</body>
+</html>
