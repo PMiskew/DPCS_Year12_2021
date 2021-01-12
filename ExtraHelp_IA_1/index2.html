@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +12,6 @@
 
 
 <body>
-
-
-
 
   <nav>
     <div class=" orange darken-2 nav-wrapper">
@@ -97,12 +95,16 @@
 <!--
 PAGE CONTENT
 -->
-  <div class = "container" id = "landing">
+  <div class = "container" id = "landing" style = "display: block">
   	<h1>Landing</h1>
   </div>
   
   <div class = "container" id = "allChoices" style = "display: none">
   		<h1>All Choices</h1>
+  		<div id = "landingContent" class =  "row">
+
+
+  		</div>
   </div>
   
   <div class = "container" id = "myChoiceDisplay" style = "display: none">
@@ -291,7 +293,7 @@ PAGE CONTENT END
 		allChoices = document.getElementById("allChoices")
 		allChoices.style.display = "none"
 
-
+		document.getElementById("landingContent").innerHTML = ""
 	})
 	//LOGIN ****************************************************
 
@@ -317,6 +319,8 @@ PAGE CONTENT END
 		//set page content
 		allChoices = document.getElementById("allChoices")
 		allChoices.style.display = "block"
+
+		updateLanding()
 
 
 	}
@@ -365,9 +369,50 @@ PAGE CONTENT END
 
 	});
 
+
+	//BUILDING CARDS*************************
+	function createCard(a,b,c) {
+ 		const card = `
+ 				<div class="col s12 m6">
+					<div class="card blue-grey darken-1">
+						<div class="card-content white-text">
+							<span class="card-title">Card Title</span>
+							<p> test</p>
+						</div>
+					<div class="card-action">
+				
+						<a href="#">This is a link</a>
+						<a href="#">This is a link</a>
+				
+					</div>
+				</div>
+				</div>
+            `;
+
+            return card
+
+ 	}
+
+ 	function updateLanding() {
+
+
+ 		content = document.getElementById("landingContent")
+ 		
+ 		for (key in data) {
+
+			newDiv = document.createElement("div")
+ 	
+ 	
+    		newDiv.innerHTML = createCard(data[key]["name"],data[key]["contact"],data[key]["hours"])
+    		content.appendChild(newDiv)
+
+
+ 		}
+ 	}
+
 	
 	//TESTING*********************************
-
+	
 
 	
 
