@@ -20,7 +20,7 @@
 	      <a href="#" class="brand-logo">Logo</a>
 	      <ul id="nav-mobile" class="right hide-on-med-and-down">
 	        <li><a class = "user_login" id = "button_login" href="#l">Login</a></li>
-	        <li><a class = "user_logout" id = "button_logout" href="#">Logout</a></li>
+	        <li><a id = "button_logout" href="#" style = "display:none">Logout</a></li>
 	       
 	      </ul>
 	    </div>
@@ -50,7 +50,6 @@
 
 	<script>
 
-	var loginState = false
 	//Firebase config
 	var firebaseConfig = {
 		apiKey: "AIzaSyB-edeq9As3ycnY8zVVL6Qw1ihJiBdf3zs",
@@ -71,9 +70,10 @@
 
 		var provider = new firebase.auth.GoogleAuthProvider();
 
-		firebase.auth().signInWithPopup(provider).then(function(result) { 
 
+		firebase.auth().signInWithRedirect(provider).then(function(result) { 
 
+			loginState = true
 			console.log("SUCCESS")
 		//document.getElementById("uid").innerHTML = userId; // display Google uid on page
 
@@ -92,20 +92,27 @@
 	function setDisplay() {
 		if (loginState === false) {
 
-			l = document.getElementsByClassName("user_logout") 
+			loginOBJ = document.getElementsByClassName("user_logout") 
+			logoutOBJ = document.getElementsByClassName("user_login")
+			for (i = 0; i < loginOBJ.length; i = i + 1) {
+				//console.log(l[i])
+				loginOBJ[i].style.display = "none";
 			
-			for (i = 0; i < l.length; i = i + 1) {
-				console.log(l[i])
-				l[i].style.display = "none";
 			}
 
 			
 		}
 	}
 	
-	setDisplay()
 
-	const loginBTN = document.querySelector("button_login")
+	const loginBTN = document.querySelector("#button_login")
+
+	loginBTN.addEventListener('click', (e) => {
+		console.log("CLICKED")
+		signIn()
+	})
+
+
 </script>
 </body>
 </html>

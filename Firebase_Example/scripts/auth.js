@@ -15,6 +15,7 @@ adminForm.addEventListener('submit', (e) => {
 //Runs when page loads
 //ADDED IN VIDEO 8
 auth.onAuthStateChanged(user => {
+    
     if (user) {
 
         user.getIdTokenResult().then(idTokenResult => {

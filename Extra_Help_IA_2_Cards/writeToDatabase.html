@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+
+
+
+
+
+</head>
+<body>
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBBtx4O7QxDig9vwV-gyWOdaeL06BsWuCM",
+    authDomain: "iaextrahelo.firebaseapp.com",
+    databaseURL: "https://iaextrahelo-default-rtdb.firebaseio.com",
+    projectId: "iaextrahelo",
+    storageBucket: "iaextrahelo.appspot.com",
+    messagingSenderId: "491921957314",
+    appId: "1:491921957314:web:a6e3b839f1fb468322365b"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  //Creates a reference to your databse,storage
+  database = firebase.database()
+  storage = firebase.storage()
+  
+
+ 
+  var recipes = [
+  			{	
+  				name: "r1",
+  			 	ingredients: "ig1, ig2, ig3",
+  			 	time: "2h"
+  			},
+  			{	
+  				name: "r2",
+  			 	ingredients: "ig1, ig2, ig3",
+  			 	time: "2h"
+  			}
+  			]
+
+  ref = database.ref()
+
+  ref.set({
+  	recipes
+  });
+
+
+
+
+
+</script>
+</body>
+</html>

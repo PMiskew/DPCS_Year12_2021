@@ -180,7 +180,7 @@ PAGE CONTENT END
 	//load data
 	db.ref('/service/').once('value').then((snapshot) => {
 
-		data = snapshot.val()
+		data = snapshot.val() //takes times
 
 	}).then((e) => {
 
@@ -201,7 +201,7 @@ PAGE CONTENT END
 
 
 	//NEW USER**************************************************
-	
+
 	const newUserForm = document.getElementById("newUserData")
 
 	newUserForm.addEventListener('submit',(e) => {

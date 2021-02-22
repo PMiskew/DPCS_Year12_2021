@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IA DEMO</title>
+	<!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+            
+</head>
+<body>
+
+
+	<div class = "container row" id = "dataDisplay">
+
+	</div> 
+
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+	     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+	    apiKey: "AIzaSyBBtx4O7QxDig9vwV-gyWOdaeL06BsWuCM",
+	    authDomain: "iaextrahelo.firebaseapp.com",
+	    databaseURL: "https://iaextrahelo-default-rtdb.firebaseio.com",
+	    projectId: "iaextrahelo",
+	    storageBucket: "iaextrahelo.appspot.com",
+	    messagingSenderId: "491921957314",
+	    appId: "1:491921957314:web:a6e3b839f1fb468322365b"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+
+	  //Creates a reference to your databse,storage
+	  database = firebase.database()
+	  storage = firebase.storage()
+
+	  //Objects
+	  const dataDisplay = document.getElementById("dataDisplay")
+
+
+	  //Data variables
+	  var data = ""
+
+
+	  function createCard(dataOBJ,key) {
+
+	  	const card = `
+
+			
+				    <div class="col s12 m6 l4">
+				      <div class="card medium blue-grey darken-1">
+				        <div class="card-content white-text">
+				          <span class="card-title">${dataOBJ["name"]}</span>
+				          <p>I am a very simple card. I am good at containing small bits of information.
+				          I am convenient because I require little markup to use effectively.</p>
+				          <a class="waves-effect waves-light btn" id = "${key}">button</a>
+				        </div>
+				        <div class="card-action">
+				          <a href="#">This is a link</a>
+				          <a href="#">This is a link</a>
+				        </div>
+				      </div>
+				    </div>
+				
+	  			`
+
+	  		return card
+	  }
+
+	  function deleteElement() {
+	  	//this accesses the button that called the function
+	  	//console.log(this)
+	  	div = document.getElementById(this.id+"C")
+	  	console.log(div)
+	  	div.remove()
+
+	  	ref = database.ref(/recipes/+this.id)
+    	ref.remove();
+    	
+	  }
+
+
+	  database.ref("/recipes/").once('value').then((snapshot) => {
+
+	  	data = snapshot.val();
+	  	console.log("THEN - ",data)
+	  	
+
+	  	for (key in data) {
+
+	  		//Created a div - not on the page
+	  		div = document.createElement("div")
+
+	  		//gave the div an id based on the key added a C
+	  		div.id = key+"C"
+
+	  		//created a card and put it on the div
+	  		//AT THIS POINT NOTHING IS ON THE PAGE
+	  		div.innerHTML = createCard(data[key], key)
+
+	  		//append the div to the dataDisplay
+	  		dataDisplay.appendChild(div)
+
+	  		btn = document.getElementById(key) //binds a function to he button
+			btn.onclick = deleteElement;
+	  	}
+
+
+
+	  });
+
+	</script>
+
+
+
+
+</body>
+</html>

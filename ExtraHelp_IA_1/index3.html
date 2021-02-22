@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>INDEX 2 - IA SAMPLE</title>
+	<title>INDEX 3 - IA SAMPLE</title>
 
 	   <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -63,7 +63,6 @@
 	<!--
 	NEW USER MODAL
 	-->
-
 	<div id="newUserModal" class="modal">
 		
 		<div class="modal-content">
@@ -163,25 +162,9 @@ PAGE CONTENT END
 	var db = firebase.database()
 
 
-	/*
-	Top for IA:
+	
+	//********INITAL LOAD OF DATA***********************************
 
-	1.	I am not managing the data in real time.  I am loading it into the 
-		program into JSON objects and will manipulate it and run all displays based on that
-
-	2.  I have loaded the data and created a landing page.  In doing this I 
-		have cheated the system a little in that I can wait for 2 seconds and 
-		know it is loaded.  Nothing will be done until my first click, by which
-		point all the data is loaded
-
-	3.	I have not used the authentication system.  What I have done is created
-		users in my database and loaded them.  This means I can leverage this for some algorithmic demonstrations
-
-	4.  I have kept everything in this one page.  It simplifys things when I 
-		don't have to swap pages. 
-
-	*/
-	//load data
 	db.ref('/service/').once('value').then((snapshot) => {
 
 		data = snapshot.val()
@@ -204,7 +187,7 @@ PAGE CONTENT END
 	})
 
 
-	//NEW USER**************************************************
+	//CREATE NEW USER************************************************
 	const newUserForm = document.getElementById("newUserData")
 
 	newUserForm.addEventListener('submit',(e) => {
@@ -379,7 +362,7 @@ PAGE CONTENT END
 
 
 	//BUILDING CARDS*************************
-	function createCard(a,b,c) {
+	function createCard(a,b,c,d) {
  		const card = `
  				<div class="col s12 m6">
 					<div class="card blue-grey darken-1">
@@ -392,7 +375,7 @@ PAGE CONTENT END
 						<a href="#">Contact: ${b}</a>
 						<a href="#">Hours: ${c}</a>
 
-						<a class = "right btn-floating btn-small wave-light red" href="#">+</a>
+						<a name = "${d}"class = "right btn-floating btn-small wave-light red" href="#">+</a>
 				
 					</div>
 				</div>
@@ -415,9 +398,10 @@ PAGE CONTENT END
 			newDiv = document.createElement("div")
  	
  	
-    		newDiv.innerHTML = createCard(data[key]["name"],data[key]["contact"],data[key]["hours"])
+    		newDiv.innerHTML = createCard(data[key]["name"],data[key]["contact"],data[key]["hours"],key)
 
     		content.appendChild(newDiv)
+
 
 
  		}
