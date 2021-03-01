@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Call Back</title>
+
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+</head>
+<body>
+
+	<!-- Modal Trigger -->
+	<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+	<!-- Modal Structure -->
+	<div id="modal1" class="modal">
+	
+		<div class="modal-content">
+			<h4>Modal Header</h4>
+			<div id = "productDisplay">
+			</div>	
+		</div>
+	
+		<div class="modal-footer">
+	
+			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+	
+		</div>
+	
+	</div>
+
+
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+	 https://firebase.google.com/docs/web/setup#available-libraries -->
+
+	<script>
+	// Your web app's Firebase configuration
+	var firebaseConfig = {
+		apiKey: "AIzaSyAhoUrhluTwrh7lF8lYTHuYfW9ErZ-nmY4",
+		authDomain: "quickstart-1573154521501.firebaseapp.com",
+		databaseURL: "https://quickstart-1573154521501-default-rtdb.firebaseio.com",
+		projectId: "quickstart-1573154521501",
+		storageBucket: "quickstart-1573154521501.appspot.com",
+		messagingSenderId: "1065751357047",
+		appId: "1:1065751357047:web:b817f3659f1f8c56bc0872"
+	};
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+
+	database = firebase.database()
+	
+	productDisplay = document.getElementById("productDisplay");
+
+
+	function modalLoad() {
+		console.log("LOADING")
+
+		database.ref("Products").once("value").then((snapshot) => {
+
+
+
+			data = snapshot.val();
+
+			productDisplay.innerHTML = ""
+
+			for (key in data) {
+
+				console.log(data[key]["name"])
+
+				productDisplay.innerHTML = productDisplay.innerHTML +  data[key]["name"] + " : " + data[key]["quantity"] + '<br>'
+
+			}
+		})
+
+	}
+
+	document.addEventListener('DOMContentLoaded', function() {
+
+
+		options = { 
+				onOpenStart : modalLoad
+				
+			  }
+
+
+
+		var elems = document.querySelectorAll('.modal');
+		var instances = M.Modal.init(elems, options);
+	});
+
+    </script>
+
+
+
+
+
+
+</body>
+</html>
