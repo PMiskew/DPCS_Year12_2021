@@ -60,6 +60,7 @@
 	productDisplay = document.getElementById("productDisplay");
 	data = "empty"
 
+	//update data based on the database collection Products
 	database.ref("Products").once("value").then((snapshot) => {
 
 
@@ -68,9 +69,10 @@
 
 			
 			
-		})
+	})
 
 
+	//initalization for the modal
 	document.addEventListener('DOMContentLoaded', function() {
 
 
@@ -85,11 +87,12 @@
 	});
 
 
+	//update the modal content
 	productDisplay.innerHTML = ""
 	console.log(data)	
+	
 	for (key in data) {
 		
-
 		productDisplay.innerHTML = productDisplay.innerHTML +  data[key]["name"] + " : " + data[key]["quantity"] + '<br>'
 
 	}

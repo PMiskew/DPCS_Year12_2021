@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Call Back</title>
+
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+</head>
+<body>
+
+<div class="row">
+        <div class="input-field">
+          <input value="Placeholder" id="first_name" type="text" class="validate">
+          <label for="first_name">First Name</label>
+        </div>
+       
+ </div>
+
+<a class="waves-effect waves-light btn" id = "getData">button</a>
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+
+
+    	const getData = document.getElementById("getData")
+
+    	getData.addEventListener("click",(e) => {
+    		name = document.getElementById("first_name")
+
+ 			console.log(name.value)
+    	});
+
+
+    </script>
+
+
+
+
+
+</body>
+</html>
