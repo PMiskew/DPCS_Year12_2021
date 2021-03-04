@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MC Questions</title>
+
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+</head>
+<body>
+
+	<!-- Modal Trigger -->
+	<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+	<!-- Modal Structure -->
+	<div id="modal1" class="modal">
+	
+		<div class="modal-content">
+		
+			<form action="#" id = "questionForm">
+				<p>
+					<label>
+						<input  id = "opt1" name="group1" type="radio" checked />
+						<span class = "options">Red</span>
+					</label>
+				</p>
+				<p>
+					<label>
+						<input  id = "opt2" name="group1" type="radio" />
+						<span class = "options">Yellow</span>
+					</label>
+				</p>
+				<p>
+					<label>
+						<input id = "opt3" name="group1" type="radio"  />
+						<span class = "options">Green</span>
+					</label>
+				</p>
+				<p>
+					<label>
+							<input id = "opt4" name="group1" type="radio"/>
+							<span class = "options">Brown</span>
+					</label>
+				</p>
+				<button class = "btn teal darken-2 z-depth-0">Submit</button>
+			</form>
+
+
+
+
+
+		</div>
+	
+		
+	
+	</div>
+
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+
+    	//You should pull these from a database on load
+    	questions = [
+
+    			{
+    				question: "What is the population of canada?",
+    				response: ["A: CCC ","B: XXX ","C: XXX ","D: XXX"],
+    				correct: "A"
+    			},
+    			{
+    				question: "What percentage of the earth does the ocean make up?",
+    				response: ["A: XXX ","B: XXX ","C: CCC ","D: XXX"],
+    				correct: "C"
+    			},
+    			{
+    				question: "In what era did flowing plants show up?",
+    				response: ["A: XXX ","B: CCC ","C: XXX ","D: XXX"],
+    				correct: "B"
+    			}
+
+
+
+
+
+    	]
+
+    	//Get elements from page
+    	const questionForm = document.getElementById("questionForm")
+
+    	//Get elements that make up the choices
+    	var options = document.getElementsByClassName("options")
+
+
+    	//Generate a random integer based on lenght of questions
+    	var qnum = Math.floor(Math.random() * questions.length);
+
+    	//initalize first MC problem
+    	options[0].innerHTML = questions[qnum]["response"][0]
+
+    	options[1].innerHTML = questions[qnum]["response"][1]
+
+    	options[2].innerHTML = questions[qnum]["response"][2]
+
+		options[3].innerHTML = questions[qnum]["response"][3]
+
+
+
+   		//initialization
+		document.addEventListener('DOMContentLoaded', (snapshot) => {
+
+			options = {}
+			var elems = document.querySelectorAll('.modal');
+			var instances = M.Modal.init(elems, options);
+		});
+
+		//Criteria C - Callback functions
+		questionForm.addEventListener("submit",(e) => {
+
+			e.preventDefault()
+
+			//get response
+			a = document.getElementById("opt1").checked
+			b = document.getElementById("opt2").checked
+			c = document.getElementById("opt3").checked
+			d = document.getElementById("opt4").checked
+
+			correctANS = questions[qnum]["correct"]
+
+			if (a == true && correctANS == "A") {
+				alert("CORRECT")
+			}
+			else if (b == true && correctANS == "B") {
+				alert("CORRECT")
+			}
+			else if (c == true && correctANS == "C") {
+				alert("CORRECT")
+			}
+			else if (d == true && correctANS == "D") {
+				alert("CORRECT")
+			}
+			else {
+				alert("WRONG")
+			}
+
+			//create new question and update the modal 
+				//generate new qnum
+
+				//using qnum access question from list
+
+				//EXTENSION
+					//ONLY ASK QUESTIONS ONCE 
+					//RANDOMIZE QUESTION SO THE ANSWRE MOVES AROUND - WILL REQUIRE DATA STRUCTURE MODIFICATION
+
+
+			const modal = document.querySelector('#modal1')
+			M.Modal.getInstance(modal).close();
+		})
+
+
+
+
+    </script>
+
+
+
+
+
+
+</body>
+</html>
